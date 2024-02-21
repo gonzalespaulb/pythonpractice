@@ -1,8 +1,8 @@
 import time
 import os
 
-"""
-This is a comment
+# CREATE A FOLDER WHEN THE FILE IS RAN
+
 """
 
 currTime = time.localtime()
@@ -17,4 +17,7 @@ folder_name = input("What shall we call this folder? ")
 
 new_folder_path = os.path.join(desktop_path, folder_name)
 
-# os.makedirs(new_folder_path)
+os.makedirs(new_folder_path)
+
+"""
+
