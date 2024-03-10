@@ -8,12 +8,12 @@ total = 0
 
 while True: 
 
-    bill = input("How much was the bill?\n")
+    bill = input("How much was the bill?\n\n")
 
     if bill.isdigit():
         bill = int(bill)
 
-        tip_percent_str = input("Tip percent? 15, 20, 35 etc..\n")
+        tip_percent_str = input("Tip percent? 15, 20, 35 etc..\n\n")
 
         if tip_percent_str.isdigit():
             tip_percent = int(tip_percent_str)
@@ -30,7 +30,7 @@ total = bill + (bill * (tip_percent / 100))
 split_number = 0
 
 while True: 
-    split = input("How many people are splitting this? \n")
+    split = input("How many people are splitting this? \n\n")
 
     if split.isdigit():
         split_number = int(split)
@@ -45,7 +45,21 @@ print(f"The total is {total} divided by {split_number} of people. Each person ow
 
 time.sleep(3)
 
-payment_method = input("So how are we paying? card or cash?\n")
+payment_method = ""
 
-if payment_method == "card":
-    print("Not mine, nose goes!!!")
+while True: 
+
+    payment_method = input("So how are we paying? card or cash?\n\n").lower()
+
+    if payment_method == "card" or payment_method == "cash":
+
+        if payment_method == "card":
+            print("Not mine, nose goes!!!")
+            break
+
+        else: 
+            print("Who carries cash nowadays?")
+            break
+
+    else: 
+        print("Not a valid type of payment.")
