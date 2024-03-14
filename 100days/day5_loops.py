@@ -55,7 +55,6 @@ while True:
 
     random_char = all_chars[random_index]
 
-    
     if password_length < total_char: 
         password.append(random_char)
         del all_chars[random_index]
