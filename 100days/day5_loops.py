@@ -26,7 +26,7 @@ while True:
     letter_length = len(letters)
 
     if letter_length < num_of_letters:
-        letters.append(all_letters[random.randint(0, len(all_letters))])
+        letters.append(all_letters[random.randint(0, len(all_letters) - 1)])
     else: 
         break
 
@@ -34,7 +34,7 @@ while True:
     symbol_length = len(symbols)
 
     if symbol_length < num_of_symbols:
-        symbols.append(all_punctuations[random.randint(0, len(all_punctuations))])
+        symbols.append(all_punctuations[random.randint(0, len(all_punctuations) - 1)])
     else: 
         break
 
@@ -46,27 +46,26 @@ while True:
     else: 
         break
 
-# while True: 
-#     password_length = len(password)
+while True: 
+    password_length = len(password)
 
-#     where_to_pick = next_pick[random.randint(0, len(next_pick)) - 1]
+    all_chars = letters + numbers + symbols
 
-#     if not len(where_to_pick): 
-#         # del next_pick[where_to_pick]
+    random_index = random.randint(0, len(all_chars) - 1)
 
-#         next_pick = list(filter(next_pick[where_to_pick], next_pick))
-#         continue
+    random_char = all_chars[random_index]
 
-#     elif password_length < total_char: 
-#         char_pick = random.randint(0, len(where_to_pick) - 1)
-#         password.append(str(where_to_pick[char_pick]))
-#         del where_to_pick[char_pick]
-
-#     else: 
-#         break
-
-# print(password)
     
-print(letters)
-print(numbers)
-print(symbols)
+    if password_length < total_char: 
+        password.append(random_char)
+        del all_chars[random_index]
+
+    else: 
+        break
+
+
+random.shuffle(password)
+
+password = ''.join(map(str, password))
+
+print(f"Your generated password is {password}.")
