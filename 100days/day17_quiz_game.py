@@ -28,7 +28,7 @@ class Question:
           self.answer = answer
      
      def ask_question(self): 
-          user_answer = input(f"{self.question} (True or False)")
+          user_answer = input(f"{self.question} (True or False): ")
           if user_answer == self.answer: 
                print("Correct!")
                score.add_point()
@@ -45,4 +45,5 @@ score = Score()
 
 for question in questions: 
      question.ask_question()
-     
+
+print(f"Finished the quiz! Your final score is {score.score}/{len(questions)}")
