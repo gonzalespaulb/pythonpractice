@@ -34,23 +34,6 @@ def draw_spirograph(size_of_gap):
 
 rows = 0
 
-# while rows < 5: 
-
-#     t.left(45)
-#     t.forward(50)
-#     t.left(45)
-
-#     for _ in range(5): 
-#         t.fillcolor("blue")
-#         t.color("blue")
-#         t.begin_fill()
-#         t.circle(10)
-#         t.end_fill()
-#         t.penup()
-#         t.forward(50)
-    
-    # rows += 1
-
 turtle.colormode(255)
 
 rgb_colors = []
@@ -61,6 +44,7 @@ for color in colors:
     b = color.rgb.b
 
     rgb_colors.append((r, g, b))
+
 rows = 0
 t.hideturtle()
 t.penup()
