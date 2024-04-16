@@ -52,9 +52,18 @@ while True:
 
     # Start from the end of the list and assign the coords of the segment before to the current segment
     for seg_num in range(len(snake_length) - 1, 0, -1): 
-        new_x = snake_length[seg_num - 1].xcor()
-        new_y = snake_length[seg_num - 1].ycor()
-        snake_length[seg_num].goto(new_x, new_y)
+        if snake_length[seg_num].distance(snake_head) < 10:
+            game_over = Turtle()
+            game_over.penup()
+            game_over.color("white")
+            game_over.goto(0, 0)
+            game_over.write(f"Game Over! Score: {dots_eaten - 2}", align="center", font=("Courier", 24, "normal"))
+            break
+
+        else:
+            new_x = snake_length[seg_num - 1].xcor()
+            new_y = snake_length[seg_num - 1].ycor()
+            snake_length[seg_num].goto(new_x, new_y)
 
     # If statement is to prevent from going backwards on itself
     def move_up(): 
@@ -75,6 +84,7 @@ while True:
     screen.onkey(key="Left", fun=move_left)
     screen.onkey(key="Right", fun=move_right)
 
+    # Rerender food in random spot and grow snake
     if snake_head.distance(food) < 15: 
         dots_eaten += 1
         food.goto(get_divisible_coordinate(), get_divisible_coordinate())
@@ -82,7 +92,18 @@ while True:
         t = Turtle(shape="square")
         t.penup()
         t.color("white")
+        t.goto(snake_length[-1].xcor(), snake_length[-1].ycor())
         snake_length.append(t)
+
+    # End game if snake hits the wall
+    if snake_head.xcor() > 280 or snake_head.xcor() < -280 or snake_head.ycor() > 280 or snake_head.ycor() < -280: 
+        game_over = Turtle()
+        game_over.penup()
+        game_over.color("white")
+        game_over.goto(0, 0)
+        game_over.write(f"Game Over! Score: {dots_eaten - 2}", align="center", font=("Courier", 24, "normal"))
+        
+        break
 
     snake_head.forward(20)
 
