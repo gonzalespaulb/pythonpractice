@@ -25,6 +25,24 @@ class Player(Turtle):
     def move_backward(self): 
         self.backward(20)    
 
+class Scoreboard(Turtle): 
+    def __init__(self): 
+        super().__init__()
+        self.color("black")
+        self.penup()
+        self.hideturtle()
+        self.score = 0
+        self.update_score()
+
+    def update_score(self): 
+        self.clear()
+        self.goto(-100, 200)
+        self.write(self.score, align="center", font=("Courier",80,  "normal"))
+
+    def player_scores(self): 
+        self.score += 1
+        self.update_score()        
+
 
 class Car(Turtle): 
     def __init__(self):
@@ -39,12 +57,17 @@ class Car(Turtle):
         self.forward(20)
 
 paulie = Player()
+scoreboard = Scoreboard()
 cars = []
 
-for index in range(15): 
-    car = Car()
-    car.goto(random.randint(270, 540), -280 + (40 * index))
-    cars.append(car)
+def generate_cars():
+
+    for index in range(15): 
+        car = Car()
+        car.goto(random.randint(300, 540), -280 + (40 * index))
+        cars.append(car)
+
+generate_cars()
 
 screen.listen()
 screen.onkey(paulie.move_forward, "Up")
@@ -59,6 +82,12 @@ while game_is_on:
     for car in cars: 
         if car.distance(paulie) < 20: 
             game_is_on = False
+
+        elif paulie.ycor() > 280: 
+            scoreboard.player_scores()
+            paulie.goto(0, -280)
+            for car in cars: 
+                car.goto(random.randint(270, 540), car.ycor())     
 
         elif car.xcor() < -300: 
             car.goto(random.randint(270, 540), car.ycor())
