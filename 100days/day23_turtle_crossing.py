@@ -17,6 +17,7 @@ class Player(Turtle):
         self.fillcolor("green")
         self.penup()
         self.goto(0, -280)
+        self.shapesize(stretch_wid=0.8)
 
     def move_forward(self): 
         self.forward(20)
@@ -56,7 +57,10 @@ while game_is_on:
     time.sleep(0.1)
 
     for car in cars: 
-        if car.xcor() < -300: 
+        if car.distance(paulie) < 20: 
+            game_is_on = False
+
+        elif car.xcor() < -300: 
             car.goto(random.randint(270, 540), car.ycor())
         else: 
             car.drive()
