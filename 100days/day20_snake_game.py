@@ -20,6 +20,24 @@ screen.listen()
 dots_eaten = 2
 snake_length = []
 
+class Scoreboard(Turtle): 
+    def __init__(self):
+        super().__init__()        
+        self.color("white")
+        self.score = len(snake_length)
+        self.update_score()     
+
+    def update_score(self): 
+        self.clear()
+        self.penup()
+        self.goto(0, 200)
+        self.write(self.score, align="center", font=("Courier",80,  "normal"))  
+
+    def snake_ate(self): 
+        self.score += 1
+        self.update_score()
+
+scoreboard = Scoreboard()
 
 def render_length(): 
     for index in range(0, dots_eaten):
@@ -87,6 +105,7 @@ while True:
     # Rerender food in random spot and grow snake
     if snake_head.distance(food) < 15: 
         dots_eaten += 1
+        scoreboard.snake_ate()
         food.goto(get_divisible_coordinate(), get_divisible_coordinate())
 
         t = Turtle(shape="square")

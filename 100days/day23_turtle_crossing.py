@@ -95,4 +95,3 @@ while game_is_on:
             car.drive()
 
 screen.exitonclick()
-
