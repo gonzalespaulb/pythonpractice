@@ -2,6 +2,11 @@ from turtle import Turtle, Screen
 import time
 import random
 
+with open("./100days/test.txt") as file:
+    contents = file.read()
+
+
+
 screen = Screen()
 
 WIDTH = 600
@@ -25,16 +30,26 @@ class Scoreboard(Turtle):
         super().__init__()        
         self.color("white")
         self.score = len(snake_length)
+        self.high_score = int(contents) if contents.strip() else 0
         self.update_score()     
 
     def update_score(self): 
         self.clear()
         self.penup()
         self.goto(0, 200)
-        self.write(self.score, align="center", font=("Courier",80,  "normal"))  
+        self.write(f"Score: {self.score} High Score: {self.high_score}", align="center", font=("Courier",18,  "normal"))  
 
     def snake_ate(self): 
         self.score += 1
+        self.update_score()
+
+    def reset(self): 
+        if self.score > self.high_score: 
+            self.high_score = self.score
+            with open("./100days/test.txt", mode="w") as file:
+                file.write(str(self.score))
+            self.score = 0
+
         self.update_score()
 
 scoreboard = Scoreboard()
@@ -63,7 +78,9 @@ food.penup()
 food.color("white")
 food.goto(get_divisible_coordinate(), get_divisible_coordinate())
 
-while True: 
+is_game_on = True
+
+while is_game_on: 
 
     screen.update()
     time.sleep(0.1)
@@ -121,8 +138,10 @@ while True:
         game_over.color("white")
         game_over.goto(0, 0)
         game_over.write(f"Game Over! Score: {dots_eaten - 2}", align="center", font=("Courier", 24, "normal"))
-        
-        break
+        scoreboard.reset()
+        snake_length.clear()
+        render_length()
+        continue
 
     snake_head.forward(20)
 
