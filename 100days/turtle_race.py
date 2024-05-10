@@ -6,8 +6,9 @@ WIDTH = 600
 HEIGHT = 600
 
 
-turtles = ["Paul", "Lillian", "Memphis", "Ozzie", "Mason"]
+names = ["Paul", "Lillian", "Memphis", "Ozzie", "Mason"]
 color = ["red", "blue", "yellow", "purple", "brown"]
+turtles = []
 
 
 class My_Turtle(Turtle):
@@ -15,20 +16,27 @@ class My_Turtle(Turtle):
         super().__init__()
         self.shape("turtle")
         self.penup()
-        # self.fillcolor("purple")
-        # self.goto(150, 0)
 
-for index in range(0, len(turtles)):
+for index in range(0, len(names)):
 
     t = My_Turtle()
     t.fillcolor(color[index])
-    t.goto(0, index * 30)
+    t.goto(-290, index * 30)
+    turtles.append(t)
 
+game_is_on = True
 
-
-# lillian.shape("turtle")
-# lillian.penup()
-# lillian.fillcolor("purple")
-# lillian.goto(150, 0)
+while game_is_on:
+    for turtle in turtles: 
+        turtle.forward(10)
+    
 
 screen.exitonclick()
+
+
+
+
+def hello():
+    print("hello")
+
+hello()

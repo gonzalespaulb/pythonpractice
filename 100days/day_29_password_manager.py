@@ -29,9 +29,6 @@ password_input.grid(row=2, column=1)
 
 # NOTE ----------------------------------------------- BUTTONS
 
-generate_button = Button(text="Generate Password")
-
-generate_button.grid(row=2, column=2)
 
 def add_password(): 
 
@@ -49,5 +46,11 @@ def add_password():
 
 add_button = Button(text="Add", width=36, command=add_password)
 add_button.grid(row=3, column=1, columnspan=2)
+
+def generate_password(): 
+    password_input.insert(0, "New Password")
+
+generate_button = Button(text="Generate Password", command=generate_password)
+generate_button.grid(row=2, column=2)
 
 window.mainloop()
