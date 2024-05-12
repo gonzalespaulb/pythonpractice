@@ -23,7 +23,8 @@ def password_generate():
 
     random.shuffle(all_choices)
     password = ''.join(map(str, all_choices))
-    return password
+    password_input.insert(0, password)
+    
 
 # NOTE ----------------------------------------------- LABELS
 
@@ -65,10 +66,27 @@ def add_password():
 add_button = Button(text="Add", width=36, command=add_password)
 add_button.grid(row=3, column=1, columnspan=2)
 
-def generate_password(): 
-    password_input.insert(0, password_generate())
 
-generate_button = Button(text="Generate Password", command=generate_password)
+generate_button = Button(text="Generate Password", command=password_generate)
 generate_button.grid(row=2, column=2)
 
 window.mainloop()
+
+# NOTE ----------------------------------------------- TRY EXCEPT LOGIC
+
+# fruits = ["Apple", "Peach", "Pineapple"]
+
+# def make_pie(index): 
+#     try:
+#         fruit = fruits[int(index)]
+#     except ValueError: 
+#         print("The input you added is not a number.")
+#     except IndexError: 
+#         new_fruit = input("This fruit does not exist, let's add it to the list.\n")
+#         fruits.append(new_fruit)
+#         make_pie(fruits.index(new_fruit))
+#     else: 
+#         print(fruit + "pie")
+
+
+# make_pie(4)
