@@ -1,10 +1,29 @@
 from tkinter import *
+import string
+import random
 password_file = "./100days/data.txt"
 
 window = Tk()
 window.title("PassMAN")
 window.minsize(height=200, width=200)
 window.config(padx=20, pady=20)
+
+# NOTE ----------------------------------------------- PASSWORD GENERATOR LOGIC
+
+all_letters = list(string.ascii_letters)
+all_punctuations = list(string.punctuation)
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def password_generate(): 
+    all_choices = []
+    for _ in range(3): 
+        all_choices.append(random.choice(all_letters))
+        all_choices.append(random.choice(all_punctuations))
+        all_choices.append(random.choice(numbers))
+
+    random.shuffle(all_choices)
+    password = ''.join(map(str, all_choices))
+    return password
 
 # NOTE ----------------------------------------------- LABELS
 
@@ -29,7 +48,6 @@ password_input.grid(row=2, column=1)
 
 # NOTE ----------------------------------------------- BUTTONS
 
-
 def add_password(): 
 
     website_value = website_input.get()
@@ -48,7 +66,7 @@ add_button = Button(text="Add", width=36, command=add_password)
 add_button.grid(row=3, column=1, columnspan=2)
 
 def generate_password(): 
-    password_input.insert(0, "New Password")
+    password_input.insert(0, password_generate())
 
 generate_button = Button(text="Generate Password", command=generate_password)
 generate_button.grid(row=2, column=2)
