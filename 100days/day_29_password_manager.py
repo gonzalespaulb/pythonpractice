@@ -49,7 +49,7 @@ website_input.grid(row=0, column=1)
 username_input.grid(row=1, column=1)
 password_input.grid(row=2, column=1)
 
-# NOTE ----------------------------------------------- BUTTONS
+# NOTE ----------------------------------------------- ADD NEW PASSWORD
 
 def add_password(): 
 
@@ -91,9 +91,28 @@ def add_password():
     username_input.delete(0, END)
     password_input.delete(0, END)
 
+# NOTE ----------------------------------------------- ADD NEW PASSWORD
+
+def find_password(): 
+    try: 
+        with open(password_file_json, mode="r") as file:
+            data = json.load(file)
+            key_to_find = data[f"{website_input.get()}"]
+    except KeyError: 
+        print("Key not found")
+    else: 
+        username_input.delete(0, END)
+        password_input.delete(0, END)
+        username_input.insert(0, key_to_find["username"])
+        password_input.insert(0, key_to_find["password"])
+
+# NOTE ----------------------------------------------- BUTTONS
+
+find_button = Button(text="Find Website", command=find_password)
+find_button.grid(row=0, column=2)
+
 add_button = Button(text="Add", width=36, command=add_password)
 add_button.grid(row=3, column=1, columnspan=2)
-
 
 generate_button = Button(text="Generate Password", command=password_generate)
 generate_button.grid(row=2, column=2)
