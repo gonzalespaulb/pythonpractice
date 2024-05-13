@@ -1,7 +1,9 @@
 from tkinter import *
 import string
 import random
+import json
 password_file = "./100days/data.txt"
+password_file_json = "./100days/data.json"
 
 window = Tk()
 window.title("PassMAN")
@@ -54,10 +56,36 @@ def add_password():
     website_value = website_input.get()
     username_value = username_input.get()
     password_value = password_input.get()
+    new_data = {
+        website_value: {
+            "username":username_value,
+            "password": password_value
+        }
+        }
 
-    with open(password_file, mode="a") as file:
-        file.write(f"{website_value} | {username_value} | {password_value}\n")
+    def check_and_update_file(): 
+        
+        try: 
+            with open(password_file_json, mode="r") as file:
+                data = json.load(file)
 
+        # NOTE ------------- CREATES THE INITIAL DICTIONARY FOR THE FINALLY TO DUMP
+        except (FileNotFoundError, json.JSONDecodeError): 
+            print("File not found. Creating new file.")
+            data = new_data
+
+        # NOTE ------------- TAKES THE OLD DATA AND ADDS THE NEW ONE
+        else: 
+            print("File loaded successfully.")
+            data.update(new_data)
+        
+        # NOTE ------------- STILL OVERWRITES BUT INCLUDING NEW DATA, NO MATTER WHAT IT WILL WRITE TO THE JSON OR CREATE THE FILE
+        finally: 
+            with open(password_file_json, mode="w") as file:
+                json.dump(data, file, indent=4)
+                print("Data written to file.")
+
+    check_and_update_file()
 
     website_input.delete(0, END)
     username_input.delete(0, END)
