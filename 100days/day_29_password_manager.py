@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import string
 import random
 import json
@@ -26,7 +27,6 @@ def password_generate():
     random.shuffle(all_choices)
     password = ''.join(map(str, all_choices))
     password_input.insert(0, password)
-    
 
 # NOTE ----------------------------------------------- LABELS
 
@@ -84,12 +84,11 @@ def add_password():
             with open(password_file_json, mode="w") as file:
                 json.dump(data, file, indent=4)
                 print("Data written to file.")
+                website_input.delete(0, END)
+                username_input.delete(0, END)
+                password_input.delete(0, END)
 
     check_and_update_file()
-
-    website_input.delete(0, END)
-    username_input.delete(0, END)
-    password_input.delete(0, END)
 
 # NOTE ----------------------------------------------- ADD NEW PASSWORD
 
@@ -99,7 +98,10 @@ def find_password():
             data = json.load(file)
             key_to_find = data[f"{website_input.get()}"]
     except KeyError: 
-        print("Key not found")
+        print(f"Password key does not exist.")
+        messagebox.showinfo(title="Error", message="Password key does not exist")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="Password file does not exist")
     else: 
         username_input.delete(0, END)
         password_input.delete(0, END)
