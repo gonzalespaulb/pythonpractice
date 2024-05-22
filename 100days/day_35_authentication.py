@@ -1,6 +1,33 @@
 import requests
 import datetime as dt
 
+# from twilio.rest import Client
+
+# account_sid = 'AC98e0ded99bf88cf08ab4da2977bda8da'
+# auth_token = '1b1d8dc0b5f34d8deabb7c82841b36b5'
+# client = Client(account_sid, auth_token)
+
+# message = client.messages.create(
+#   from_='+18448110673',
+#   body='Hello from Twilio',
+#   to='+18777804236'
+# )
+
+# print(message.status)
+
+import smtplib
+
+my_email = "paulgonzales.subscriptions@gmail.com"
+to_email = "gonzalespaulb@gmail.com"
+my_password = "wkvn cwzd mrla bbdr"
+
+def send_email(time): 
+    with smtplib.SMTP("smtp.gmail.com") as connection: 
+        connection.starttls()
+        connection.login(user=my_email, password=my_password)
+        connection.sendmail(from_addr=my_email, to_addrs=to_email, msg=f"Subject: Rain Alert!\n\nwill start raining at {time}.")
+
+
 key = "88ffe76f46b1a0705522c3c415b3c8f1"
 lat = 39.396969
 lon = -107.217529
@@ -40,5 +67,5 @@ for key in weather_list:
         condition_code = weather["id"]
         will_rain = True if condition_code < 700 else False
 
-    print(formatted_timestamp, "Bring Umbrella" if will_rain else "")
+    # send_email(formatted_timestamp) if will_rain else None
     
