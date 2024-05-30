@@ -1,7 +1,9 @@
+from dotenv import load_dotenv
 import requests
-import time
+import os
 
-stock_api = "UQAJK7J49CZV1AYS"
+load_dotenv()
+stock_api = os.getenv('STOCK_API_KEY')
 
 company_ticker = input("Enter a company ticker.\n").upper()
 news_url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers={company_ticker}&apikey={stock_api}'
