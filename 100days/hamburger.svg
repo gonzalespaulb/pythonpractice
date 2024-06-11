@@ -1,0 +1,2 @@
+<svg class="hamburger-icon" fill="none" height="14" viewbox="0 0 20 14" width="20" xmlns="http://www.w3.org/2000/svg"> <path d="M1 7H13M1 1H19M1 13H19" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> </svg>
+<svg class="close-icon" fill="none" height="15" viewbox="0 0 15 15" width="15" xmlns="http://www.w3.org/2000/svg"> <path d="M13.75 1.25L1.25 13.75M1.25 1.25L13.75 13.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path> </svg>
